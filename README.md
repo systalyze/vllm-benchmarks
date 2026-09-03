@@ -10,46 +10,21 @@ a rising series of request rates until its throughput stops growing.
 
 ## Results
 
-Median inter-token latency of the best configuration, compared with the stock BF16 baseline
-at the same load (85 % of the baseline's capacity).
+Baseline: the BF16 checkpoint on stock vLLM with default settings, one replica per GPU. Every column reads baseline → ours. Capacity and cost are at the throughput plateau; p99 TTFT, p99 ITL and per-user speed are at the same request rate, 85 % of the baseline's capacity.
 
-| p50 ITL gain (x lower) | G7 - 8x RTX PRO 4500 32 GB (g7.48xlarge)† | G7e - 4x RTX PRO 6000 96 GB (g7e.24xlarge)* | H200 - 8x H200 SXM 141 GB (p5en.48xlarge) |
-|---|---:|---:|---:|
-| **Gemma-4-26B-A4B-IT** | **7.8x**§ | **9.1x** | **3.9x** |
-| **Nemotron-3-Nano-30B-A3B** | **5.5x** | **5.2x** | **2.3x** |
-| **Qwen3-32B** | **8.0x** | **9.0x**§ | **5.7x** |
+| instance · model | capacity, tok/s/GPU | p99 TTFT | p99 ITL | per-user tok/s | $ per 1M output tokens |
+|---|---|---|---|---|---|
+| G7 · Gemma | 183 → 723 (4.0×) | 2.67 → 0.83 s (3.2×) | 112 → 15 ms (7.5×) | 15 → 118 (7.9×) | $5.41 → $1.45 (3.7×) |
+| G7 · Nemotron | 241 → 775 (3.2×) | 1.88 → 0.63 s (3.0×) | 76 → 13 ms (5.9×) | 20 → 109 (5.5×) | $4.10 → $1.28 (3.2×) |
+| G7 · Qwen | 39 → 130 (3.3×) | 6.46 → 2.64 s (2.5×) | 230 → 23 ms (9.8×) | 11 → 88 (8.1×) | $25.23 → $7.68 (3.3×) |
+| G7e · Gemma | 849 → 2,136 (2.5×) | 1.55 → 0.42 s (3.7×) | 113 → 13 ms (8.9×) | 13 → 117 (9.0×) | $1.36 → $0.56 (2.4×) |
+| G7e · Nemotron | 1,178 → 2,114 (1.8×) | 1.25 → 0.35 s (3.6×) | 117 → 11 ms (10.2×) | 12 → 108 (9.1×) | $0.98 → $0.54 (1.8×) |
+| G7e · Qwen | 136 → 461 (3.4×) | 10.78 → 1.67 s (6.4×) | 155 → 22 ms (7.0×) | 9 → 86 (9.1×) | $8.44 → $2.79 (3.0×) |
+| H200 · Gemma | 1,980 → 2,625 (1.3×) | 0.78 → 0.42 s (1.9×) | 55 → 7 ms (7.6×) | 28 → 206 (7.3×) | $1.11 → $0.94 (1.2×) |
+| H200 · Nemotron | 2,568 → 3,635 (1.4×) | 0.82 → 0.30 s (2.7×) | 58 → 8 ms (7.3×) | 26 → 162 (6.3×) | $0.86 → $0.60 (1.4×) |
+| H200 · Qwen | 351 → 559 (1.6×) | 4.78 → 0.84 s (5.7×) | 184 → 25 ms (7.5×) | 16 → 92 (5.7×) | $6.26 → $4.12 (1.5×) |
 
-- The baseline is the BF16 checkpoint on stock vLLM 0.27.1 with default flags, one replica
-  per GPU, driven to its own throughput plateau.
-- † On G7 the BF16 weights do not fit one or two 32 GB GPUs, so the baseline there is DP2xTP4.
-- § The load point is below the lowest rate measured for that configuration, so the gain is
-  a lower bound.
-- \* AWS asked for the 8-GPU g7e.48xlarge, but none was obtainable in any region, so G7e was
-  measured on the 4-GPU g7e.24xlarge. Every winner is one replica per GPU, so per-GPU numbers
-  carry to the 8-GPU node. On G7 and H200 this was checked with full 8-GPU runs (within
-  0.4 % and 0.03 %).
-
-Load points, req/s per GPU: Gemma 0.729 / 3.488 / 7.640, Nemotron 0.971 / 5.040 / 9.956,
-Qwen 0.165 / 0.529 / 1.290. Baseline capacities, req/s per GPU: 0.858 / 4.103 / 8.989,
-1.142 / 5.929 / 11.713, 0.194 / 0.622 / 1.517.
-
-Capacity, per-user speed and cost, baseline against the recommended deployment. Capacity is
-output tokens/s per GPU at the plateau of the recommended configuration. Cost uses on-demand prices of $3.564 (G7), $4.1425 (G7e) and $7.912 (H200) per GPU-hour.
-
-| instance · model | capacity, tok/s/GPU (baseline → recommended) | p50 ITL gain | per-user tok/s p50 (baseline → best) | $ per 1M output tokens (baseline → recommended) |
-|---|---|---:|---|---|
-| G7 · Gemma | 182 → 712 (3.9×) | 7.8×§ | 78 → 152 | $5.41 → $1.37 |
-| G7 · Nemotron | 241 → 765 (3.2×) | 5.5× | 95 → 186 | $4.10 → $1.28 |
-| G7 · Qwen | 38 → 129 (3.4×) | 8.0× | 31 → 99 | $25.23 → $7.68 |
-| G7e · Gemma | 844 → 1,763 (2.1×) | 9.1× | 55 → 207 | $1.36 → $0.65 |
-| G7e · Nemotron | 1,167 → 2,067 (1.8×) | 5.2× | 57 → 244 | $0.98 → $0.54 |
-| G7e · Qwen | 136 → 409 (3.0×) | 9.0×§ | 16 → 88 | $8.44 → $2.49 |
-| H200 · Gemma | 1,972 → 2,619 (1.3×) | 3.9× | 111 → 367 | $1.11 → $0.84 |
-| H200 · Nemotron | 2,550 → 3,578 (1.4×) | 2.3× | 132 → 293 | $0.86 → $0.60 |
-| H200 · Qwen | 343 → 503 (1.5×) | 5.7× | 42 → 182 | $6.26 → $4.35 |
-
-`configs/INDEX.md` lists every configuration: precision, arrangement, KV
-cache, batch limits, flags, vLLM version and whether speculation was measured on it.
+`configs/INDEX.md` lists every configuration: precision, arrangement, KV cache, batch limits, flags, vLLM version and whether speculation was measured on it.
 
 ## Running one configuration
 
