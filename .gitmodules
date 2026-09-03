@@ -1,4 +1,4 @@
 [submodule "vllm"]
 	path = vllm
-	url = https://github.com/systalyze-ai/vllm.git
+	url = https://github.com/systalyze/vllm-sys.git
 	branch = systalyze/serving-0.27.1
