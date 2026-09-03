@@ -1,0 +1,44 @@
+{
+ "row_id": "spec2-g7-qwen-opt5-eagle3-k3",
+ "served_model_name": "spec2-g7-qwen-opt5-eagle3-k3",
+ "model_path": "/data/models/Qwen3-32B-NVFP4",
+ "tokenizer_path": "/data/models/Qwen3-32B-NVFP4",
+ "tokenizer_id": "qwen3-32b",
+ "image": "vllm/vllm-openai:v0.28.0",
+ "vllm_branch": "systalyze/dspark-gemma4-0.28.0",
+ "tp": 2,
+ "gpus": [
+  6,
+  7
+ ],
+ "provisioned_gpus": 2,
+ "full_node_gpus": 8,
+ "lambda_sat": 0.8246786535901722,
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--max-num-seqs",
+  "8",
+  "--max-num-batched-tokens",
+  "2048",
+  "--kv-cache-dtype",
+  "fp8",
+  "--gpu-memory-utilization",
+  "0.80",
+  "--speculative-config",
+  "{\"method\": \"eagle3\", \"model\": \"/data/models/Qwen3-32B-speculator.eagle3\", \"num_speculative_tokens\": 3}"
+ ],
+ "env": {},
+ "speculative_config": {
+  "method": "eagle3",
+  "model": "/data/models/Qwen3-32B-speculator.eagle3",
+  "num_speculative_tokens": 3
+ },
+ "workload_overrides": {
+  "ignore_eos": false,
+  "min_tokens": null
+ }
+}

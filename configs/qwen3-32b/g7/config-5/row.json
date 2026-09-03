@@ -1,0 +1,35 @@
+{
+ "row_id": "g7-qwen-nvfp4-tp2-fp8kv-mns8-mnbt2048",
+ "served_model_name": "g7-qwen-nvfp4-tp2-fp8kv-mns8-mnbt2048",
+ "model_path": "/data/models/Qwen3-32B-NVFP4",
+ "tokenizer_path": "/data/models/Qwen3-32B-NVFP4",
+ "tokenizer_id": "qwen3-32b",
+ "checkpoint": {
+  "repo": "RedHatAI/Qwen3-32B-NVFP4",
+  "revision": "10a4cab9378ab938be865492b96ff42faff11c3f"
+ },
+ "image": "vllm/vllm-openai:v0.27.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 2,
+ "gpus": [
+  6,
+  7
+ ],
+ "provisioned_gpus": 2,
+ "full_node_gpus": 8,
+ "lambda_sat": "probe",
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--max-num-seqs",
+  "8",
+  "--max-num-batched-tokens",
+  "2048",
+  "--kv-cache-dtype",
+  "fp8"
+ ],
+ "env": {}
+}

@@ -1,0 +1,60 @@
+{
+ "row_id": "spec-h200g-gem-dspark-ours-k5-mixed-w4a16-fp8",
+ "served_model_name": "spec-h200g-gem-dspark-ours-k5-mixed-w4a16-fp8",
+ "model_path": "/data/models/gemma-4-26B-A4B-it-MIXED-experts-W4A16-FP8",
+ "tokenizer_path": "/data/models/gemma-4-26B-A4B-it-MIXED-experts-W4A16-FP8",
+ "tokenizer_id": "gemma-4-26b-a4b-it",
+ "checkpoint": {
+  "repo": "systalyze/gemma-4-26B-A4B-it-MIXED-experts-W4A16-FP8",
+  "revision": "98bc35873f5f48f6a9f67f3f38358f0332dedcaf"
+ },
+ "image": "vllm/vllm-openai:v0.28.0",
+ "vllm_branch": "systalyze/dspark-gemma4-0.28.0",
+ "tp": 1,
+ "gpus": [
+  0
+ ],
+ "provisioned_gpus": 1,
+ "full_node_gpus": 8,
+ "lambda_sat": 6.902495779583117,
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--hf-overrides",
+  "{\"architectures\": [\"Gemma4ForCausalLM\"]}",
+  "--max-num-batched-tokens",
+  "16384",
+  "--max-num-seqs",
+  "256",
+  "--kv-cache-dtype",
+  "auto",
+  "--trust-remote-code",
+  "--speculative-config",
+  "{\"method\": \"dspark\", \"model\": \"$REPO/models/dspark-gemma4-26b-a4b\", \"num_speculative_tokens\": 5, \"draft_sample_method\": \"greedy\"}"
+ ],
+ "env": {},
+ "docker_run_args": [
+  "-v"
+ ],
+ "fork_mounts": {
+  "source_root": "vllm",
+  "target_root": "/usr/local/lib/python3.12/dist-packages/vllm",
+  "files": [
+   "vllm/model_executor/models/gemma4_dspark.py"
+  ]
+ },
+ "speculative_config": {
+  "method": "dspark",
+  "model": "/data/models/dspark-gemma4-26b-a4b",
+  "num_speculative_tokens": 5,
+  "draft_sample_method": "greedy"
+ },
+ "workload_overrides": {
+  "ignore_eos": false,
+  "min_tokens": null
+ },
+ "node": "aws-p5en.48xlarge"
+}

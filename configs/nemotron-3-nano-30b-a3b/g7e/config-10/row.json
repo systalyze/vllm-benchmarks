@@ -1,0 +1,33 @@
+{
+ "row_id": "g7e-nem-nvfp4-tp1-mns128-mnbt8192-r512",
+ "served_model_name": "g7e-nem-nvfp4-tp1-mns128-mnbt8192-r512",
+ "model_path": "/data/models/Nemotron-3-Nano-30B-A3B-NVFP4",
+ "tokenizer_path": "/data/models/Nemotron-3-Nano-30B-A3B-NVFP4",
+ "tokenizer_id": "nemotron-3-nano-30b-a3b",
+ "image": "vllm/vllm-openai:v0.27.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 1,
+ "gpus": [
+  1
+ ],
+ "provisioned_gpus": 1,
+ "full_node_gpus": 2,
+ "lambda_sat": 15.39551018297794,
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--max-num-seqs",
+  "128",
+  "--max-num-batched-tokens",
+  "8192"
+ ],
+ "env": {
+  "VLLM_FLASHINFER_AUTOTUNE_CACHE_DIR": "/data/fi-tactics"
+ },
+ "requests_per_rate": 512,
+ "warmup_requests": 16,
+ "node": "aws-g7e.24xlarge us-east-1d"
+}

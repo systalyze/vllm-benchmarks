@@ -1,0 +1,29 @@
+{
+ "row_id": "h200g-nem-ctl-r512",
+ "served_model_name": "h200g-nem-ctl-r512",
+ "model_path": "/data/models/Nemotron-3-Nano-30B-A3B-BF16",
+ "tokenizer_path": "/data/models/Nemotron-3-Nano-30B-A3B-BF16",
+ "tokenizer_id": "nemotron-3-nano-30b-a3b",
+ "checkpoint": {
+  "repo": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+  "revision": "bf77c3174f68ad409e1c2aa60daeb46e32d1c606"
+ },
+ "image": "vllm/vllm-openai:v0.27.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 1,
+ "gpus": [
+  0
+ ],
+ "provisioned_gpus": 1,
+ "full_node_gpus": 8,
+ "lambda_sat": 9.803814440769703,
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching"
+ ],
+ "env": {},
+ "requests_per_rate": 512,
+ "warmup_requests": 16,
+ "node": "aws-p5en.48xlarge"
+}

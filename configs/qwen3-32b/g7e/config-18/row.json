@@ -1,0 +1,33 @@
+{
+ "row_id": "g7e-qwen-nvfp4-fp8kv-tp1-mns32",
+ "served_model_name": "g7e-qwen-nvfp4-fp8kv-tp1-mns32",
+ "model_path": "/data/models/Qwen3-32B-NVFP4",
+ "tokenizer_path": "/data/models/Qwen3-32B-NVFP4",
+ "tokenizer_id": "qwen3-32b",
+ "image": "vllm/vllm-openai:v0.27.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 1,
+ "gpus": [
+  0
+ ],
+ "provisioned_gpus": 1,
+ "full_node_gpus": 2,
+ "lambda_sat": "probe",
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--max-num-seqs",
+  "32",
+  "--max-num-batched-tokens",
+  "16384",
+  "--kv-cache-dtype",
+  "fp8"
+ ],
+ "env": {
+  "VLLM_FLASHINFER_AUTOTUNE_CACHE_DIR": "/data/fi-tactics"
+ },
+ "node": "aws-g7e.24xlarge us-east-1d"
+}

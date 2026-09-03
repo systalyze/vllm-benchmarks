@@ -1,0 +1,32 @@
+{
+ "row_id": "g7-base-gem-bf16-tp4-r512",
+ "served_model_name": "g7-base-gem-bf16-tp4-r512",
+ "model_path": "/data/models/gemma-4-26B-A4B-it",
+ "tokenizer_path": "/data/models/gemma-4-26B-A4B-it",
+ "tokenizer_id": "gemma-4-26b-a4b-it",
+ "image": "systalyze/vllm-openai:v0.27.1-tf5.14.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 4,
+ "gpus": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7
+ ],
+ "provisioned_gpus": 8,
+ "full_node_gpus": 8,
+ "lambda_sat": 6.389197500320187,
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching"
+ ],
+ "env": {},
+ "requests_per_rate": 512,
+ "warmup_requests": 16,
+ "node": "aws-g7.48xlarge us-east-1"
+}

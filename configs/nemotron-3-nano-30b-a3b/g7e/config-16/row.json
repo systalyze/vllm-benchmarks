@@ -1,0 +1,34 @@
+{
+ "row_id": "g7e-nem-nvfp4-tp1-mns4",
+ "served_model_name": "g7e-nem-nvfp4-tp1-mns4",
+ "model_path": "/data/models/Nemotron-3-Nano-30B-A3B-NVFP4",
+ "tokenizer_path": "/data/models/Nemotron-3-Nano-30B-A3B-NVFP4",
+ "tokenizer_id": "nemotron-3-nano-30b-a3b",
+ "checkpoint": {
+  "repo": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4",
+  "revision": "6efb4a2a1c1fa277ce7b3df7a1416255011b1c99"
+ },
+ "image": "vllm/vllm-openai:v0.27.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 1,
+ "gpus": [
+  0
+ ],
+ "provisioned_gpus": 1,
+ "full_node_gpus": 2,
+ "lambda_sat": "probe",
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--max-num-seqs",
+  "4",
+  "--max-num-batched-tokens",
+  "16384"
+ ],
+ "env": {
+  "VLLM_FLASHINFER_AUTOTUNE_CACHE_DIR": "/data/fi-tactics"
+ }
+}

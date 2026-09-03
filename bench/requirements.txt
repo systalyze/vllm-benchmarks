@@ -1,0 +1,11 @@
+# Exactly what the campaign's driver environment had installed (uv venv, Python 3.12.3).
+# run_rate_sweep.py checks the aiperf version at startup and refuses any other.
+aiperf==0.12.0
+pyyaml==6.0.3
+# only build_workload.py (regenerating the frozen list) needs these two; the
+# bench itself does not:
+transformers==5.14.1
+# figure/table regeneration in the deliverable (not needed to reproduce a row):
+pandas==2.3.3
+matplotlib==3.11.1
+numpy==2.5.2

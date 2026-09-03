@@ -1,0 +1,43 @@
+{
+ "row_id": "g7-gem-nvfp4-tp1-fp8kv-mns16-mnbt4096-flashinfer",
+ "served_model_name": "g7-gem-nvfp4-tp1-fp8kv-mns16-mnbt4096-flashinfer",
+ "model_path": "/data/models/gemma-4-26B-A4B-it-NVFP4",
+ "tokenizer_path": "/data/models/gemma-4-26B-A4B-it-NVFP4",
+ "tokenizer_id": "gemma-4-26b-a4b-it",
+ "image": "systalyze/vllm-openai:v0.27.1-tf5.14.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 1,
+ "gpus": [
+  0
+ ],
+ "provisioned_gpus": 1,
+ "full_node_gpus": 8,
+ "lambda_sat": "probe",
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--max-num-seqs",
+  "16",
+  "--max-num-batched-tokens",
+  "4096",
+  "--hf-overrides",
+  "{\"architectures\": [\"Gemma4ForCausalLM\"]}",
+  "--kv-cache-dtype",
+  "fp8",
+  "--attention-backend",
+  "FLASHINFER"
+ ],
+ "env": {
+  "AUDIT_GEMMA4_NO_MM_PREFIX": "1"
+ },
+ "fork_mounts": {
+  "source_root": "vllm",
+  "target_root": "/usr/local/lib/python3.12/dist-packages/vllm",
+  "files": [
+   "vllm/transformers_utils/model_arch_config_convertor.py"
+  ]
+ }
+}

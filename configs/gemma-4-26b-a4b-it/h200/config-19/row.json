@@ -1,0 +1,39 @@
+{
+ "row_id": "h200g-gem-fp8-mns256-mnbt8192-r512",
+ "served_model_name": "h200g-gem-fp8-mns256-mnbt8192-r512",
+ "model_path": "/data/models/gemma-4-26B-A4B-it-FP8-dynamic",
+ "tokenizer_path": "/data/models/gemma-4-26B-A4B-it-FP8-dynamic",
+ "tokenizer_id": "gemma-4-26b-a4b-it",
+ "checkpoint": {
+  "repo": "RedHatAI/gemma-4-26B-A4B-it-FP8-dynamic",
+  "revision": "ed35d7abe5d940da41b4ff06eb482feb0be8cb44"
+ },
+ "image": "systalyze/vllm-openai:v0.27.1-tf5.14.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 1,
+ "gpus": [
+  0
+ ],
+ "provisioned_gpus": 1,
+ "full_node_gpus": 8,
+ "lambda_sat": 16.7845,
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--hf-overrides",
+  "{\"architectures\": [\"Gemma4ForCausalLM\"]}",
+  "--max-num-batched-tokens",
+  "8192",
+  "--max-num-seqs",
+  "256",
+  "--kv-cache-dtype",
+  "auto"
+ ],
+ "env": {},
+ "requests_per_rate": 512,
+ "warmup_requests": 16,
+ "node": "aws-p5en.48xlarge"
+}

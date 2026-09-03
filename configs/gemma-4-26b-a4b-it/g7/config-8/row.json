@@ -1,0 +1,36 @@
+{
+ "row_id": "g7-gem-nvfp4-tp2ep-mns16-mnbt4096",
+ "served_model_name": "g7-gem-nvfp4-tp2ep-mns16-mnbt4096",
+ "model_path": "/data/models/gemma-4-26B-A4B-it-NVFP4",
+ "tokenizer_path": "/data/models/gemma-4-26B-A4B-it-NVFP4",
+ "tokenizer_id": "gemma-4-26b-a4b-it",
+ "checkpoint": {
+  "repo": "RedHatAI/gemma-4-26B-A4B-it-NVFP4",
+  "revision": "5557756b8dce33ac72f2bd702b11729fdba3b839"
+ },
+ "image": "systalyze/vllm-openai:v0.27.1-tf5.14.1",
+ "vllm_branch": "systalyze/serving-0.27.1",
+ "tp": 2,
+ "gpus": [
+  0,
+  1
+ ],
+ "provisioned_gpus": 2,
+ "full_node_gpus": 8,
+ "lambda_sat": "probe",
+ "vllm_args": [
+  "--max-model-len",
+  "12288",
+  "--no-enable-prefix-caching",
+  "--load-format",
+  "auto",
+  "--enable-expert-parallel",
+  "--max-num-seqs",
+  "16",
+  "--max-num-batched-tokens",
+  "4096",
+  "--hf-overrides",
+  "{\"architectures\": [\"Gemma4ForCausalLM\"]}"
+ ],
+ "env": {}
+}
