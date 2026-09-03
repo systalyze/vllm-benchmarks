@@ -44,7 +44,7 @@ You need:
 | `gemma-4-26B-A4B-it` | `google/gemma-4-26B-A4B-it` | `4d7ae4984b7db7de8f8457170b3f1a419ee76d52` |
 | `gemma-4-26B-A4B-it-NVFP4` | `RedHatAI/gemma-4-26B-A4B-it-NVFP4` | `5557756b8dce33ac72f2bd702b11729fdba3b839` |
 | `gemma-4-26B-A4B-it-FP8-dynamic` | `RedHatAI/gemma-4-26B-A4B-it-FP8-dynamic` | `ed35d7abe5d940da41b4ff06eb482feb0be8cb44` |
-| `gemma-4-26B-A4B-it-MIXED-experts-W4A16-FP8` (ours) | `systalyze/gemma-4-26B-A4B-it-MIXED-experts-W4A16-FP8` | `98bc35873f5f48f6a9f67f3f38358f0332dedcaf` |
+| `gemma-4-26B-A4B-it-MIXED-experts-W4A16-FP8` (ours) | `systalyze/gemma-4-26B-A4B-it-ExpertsINT4-FP8` | `eaeecbd06780820349102326a609fa0365005de5` |
 | `Nemotron-3-Nano-30B-A3B-BF16` | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16` | `bf77c3174f68ad409e1c2aa60daeb46e32d1c606` |
 | `Nemotron-3-Nano-30B-A3B-FP8` | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8` | `9bee19446c0dfd01f356e10979d225b2a6621944` |
 | `Nemotron-3-Nano-30B-A3B-NVFP4` | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-NVFP4` | `6efb4a2a1c1fa277ce7b3df7a1416255011b1c99` |
@@ -52,7 +52,7 @@ You need:
 | `Qwen3-32B-FP8` | `Qwen/Qwen3-32B-FP8` | `aa55da1ecc13d006e8b8e4f54579b1ea8c3db2df` |
 | `Qwen3-32B-NVFP4` | `RedHatAI/Qwen3-32B-NVFP4` | `10a4cab9378ab938be865492b96ff42faff11c3f` |
 | `Qwen3-32B-speculator.eagle3` (EAGLE-3 draft for Qwen) | `RedHatAI/Qwen3-32B-speculator.eagle3` | `dc84fe7ff1db31efa824776f49c141fc8195eb47` |
-| `dspark-gemma4-26b-a4b` (ours, DSpark draft for Gemma-4) | `systalyze/dspark-gemma4-26b-a4b` | see the repo |
+| `dspark-gemma4-26b-a4b` (ours, DSpark draft for Gemma-4) | `systalyze/gemma4-26b-a4b-dspark` | `4f186d61b54671bfe6a430ba0260a960ccf83da7` |
 
 Two of the checkpoints are ours, published by Systalyze: the DSpark draft for Gemma-4 and the
 mixed W4A16/FP8 Gemma-4 checkpoint. They download the same way as the others.
