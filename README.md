@@ -1,12 +1,11 @@
-# vLLM serving benchmarks on AWS G7, G7e and H200
+This repository reproduces the vLLM serving configurations and optimizations for the throughput / latency / cost. 
 
-This repository runs the vLLM serving configurations that trace the throughput / latency / cost frontier of three models on three AWS instance types. Models:
-Gemma-4-26B-A4B-IT, Qwen3-32B and Nemotron-3-Nano-30B-A3B. Three instances: G7
-(g7.48xlarge, 8x RTX PRO 4500 32 GB), G7e (g7e.24xlarge, 4x RTX PRO 6000 96 GB) and H200
-(p5en.48xlarge, 8x H200 SXM 141 GB). One workload everywhere: 160 chat requests with
-coding prompts, input length p50 3,500 / p90 10,000 tokens, output length p50 200 / p90 400,
-no prefix caching, temperature 0, sent as Poisson arrivals. Each deployment is measured at
-a rising series of request rates until its throughput stops growing.
+- Models: Gemma-4-26B-A4B-IT, Qwen3-32B and Nemotron-3-Nano-30B-A3B.
+- Instances: G7 (g7.48xlarge, 8x RTX PRO 4500 32 GB), G7e (g7e.24xlarge, 4x RTX PRO 6000 96 GB) and H200
+(p5en.48xlarge, 8x H200 SXM 141 GB).
+- Workload everywhere: 160 chat requests with coding prompts, input length p50 3,500 / p90 10,000 tokens, output length p50 200 / p90 400.
+- Config: no prefix caching, temperature 0,  Poisson arrivals.
+- Request rate increases until saturation.
 
 ## Results
 
@@ -84,14 +83,14 @@ Results land in `runs/<name>-<UTC stamp>/`: one JSON per rate, the AIPerf output
 container logs and a manifest. A speculation arm uses the exact-length workload variant
 (`workload/aws-p50p90-v1-mintok`) automatically.
 
-## What is where
+## Files
 
 - `configs/` - one folder per configuration on the frontier, plus a `baseline/` folder per model and instance. Each holds `launch.sh` (the exact `docker run` line) and `row.json` (the same deployment as data). Where speculation was measured there is also a `launch-dspark.sh` or `launch-eagle3.sh`. `INDEX.md` lists them all.
 - `workload/` - the request lists, one per model, in two variants: `aws-p50p90-v1` for plain deployments, `aws-p50p90-v1-mintok` for speculation arms. `build_workload.py` generated them.
 - `bench/` - `run.sh` and the driver behind it, `requirements.txt`, and the `Dockerfile` for the Gemma image.
 - `vllm/` - vLLM as a git submodule. The launch lines mount patched files from it.
 
-## The vLLM branches
+## vLLM branches
 
 The launch lines run stock vLLM images and bind-mount a few patched files from the `vllm/`
 submodule over them, so nothing is rebuilt. Branch `systalyze/serving-0.27.1` is vLLM
