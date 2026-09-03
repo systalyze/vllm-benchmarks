@@ -10,19 +10,19 @@ a rising series of request rates until its throughput stops growing.
 
 ## Results
 
-Improvement over stock vLLM (the BF16 checkpoint with default settings, one replica per GPU), as a multiplier: higher throughput and per-user speed, lower latency and cost. Throughput and cost are at the throughput plateau. The latency and per-user columns depend on load, so they are given as a range from half of the baseline's capacity to 85 % of it. Absolute values for every configuration are in `configs/INDEX.md`.
+Improvement over stock vLLM (the BF16 checkpoint with default settings, one replica per GPU), as a multiplier: higher throughput and per-user speed, lower latency. Throughput is at its plateau. The latency and per-user columns depend on load, so they are given as a range from half of the baseline's capacity to 85 % of it. Absolute values for every configuration are in `configs/INDEX.md`.
 
-| instance · model | throughput (output tok/s per GPU) | p99 TTFT (s) | p99 ITL (ms) | per-user speed (tok/s) | cost ($ per 1M output tokens) |
-|---|---:|---:|---:|---:|---:|
-| G7 · Gemma | 4.0× | 1.8–3.2× | 3.5–7.5× | 3.2–7.9× | 3.7× |
-| G7 · Nemotron | 3.2× | 1.6–3.0× | 3.1–5.9× | 3.3–5.5× | 3.2× |
-| G7 · Qwen | 3.3× | 2.1–2.5× | 4.2–9.8× | 4.1–8.1× | 3.3× |
-| G7e · Gemma | 2.5× | 2.6–3.7× | 5.9–8.9× | 6.0–9.0× | 2.4× |
-| G7e · Nemotron | 1.8× | 2.3–3.6× | 7.2–10.2× | 6.7–9.1× | 1.8× |
-| G7e · Qwen | 3.4× | 2.4–6.4× | 4.8–7.0× | 5.8–9.1× | 3.0× |
-| H200 · Gemma | 1.3× | 1.5–1.9× | 4.1–7.6× | 3.8–7.3× | 1.2× |
-| H200 · Nemotron | 1.4× | 1.9–2.7× | 5.7–7.3× | 4.2–6.3× | 1.4× |
-| H200 · Qwen | 1.6× | 4.2–5.7× | 5.1–7.5× | 4.9–5.7× | 1.5× |
+| instance · model | throughput (output tok/s per GPU) | p99 TTFT (s) | p99 ITL (ms) | per-user speed (tok/s) |
+|---|---:|---:|---:|---:|
+| G7 · Gemma | 4.0× | 1.8–3.2× | 3.5–7.5× | 3.2–7.9× |
+| G7 · Nemotron | 3.2× | 1.6–3.0× | 3.1–5.9× | 3.3–5.5× |
+| G7 · Qwen | 3.3× | 2.1–2.5× | 4.2–9.8× | 4.1–8.1× |
+| G7e · Gemma | 2.5× | 2.6–3.7× | 5.9–8.9× | 6.0–9.0× |
+| G7e · Nemotron | 1.8× | 2.3–3.6× | 7.2–10.2× | 6.7–9.1× |
+| G7e · Qwen | 3.4× | 2.4–6.4× | 4.8–7.0× | 5.8–9.1× |
+| H200 · Gemma | 1.3× | 1.5–1.9× | 4.1–7.6× | 3.8–7.3× |
+| H200 · Nemotron | 1.4× | 1.9–2.7× | 5.7–7.3× | 4.2–6.3× |
+| H200 · Qwen | 1.6× | 4.2–5.7× | 5.1–7.5× | 4.9–5.7× |
 
 `configs/INDEX.md` lists every configuration: precision, arrangement, KV cache, batch limits, flags, vLLM version and whether speculation was measured on it.
 
